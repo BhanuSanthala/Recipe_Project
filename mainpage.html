@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Website</title>
+    <link rel="stylesheet" href="mainpagestyle.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="images/fruit-logo-food-recipe-business-png-favpng-HUvujmv3a23dftJfpeGxyFeaq.jpg"
+          alt="Logo"
+        />
+      </div>
+      <div class="header-right">
+        <a href="chefpage.php">Chef</a>
+        <a href="aboutUs.html">About Us</a>
+        <a href="contactUs.html">Contact Us</a>
+        <a href="logout.php">Logout</a>
+      </div>
+    </header>
+
+    <div id="recipe-container" class="recipe-container">
+      <!-- Recipe content will be dynamically added here -->
+    </div>
+
+    <footer>
+      <!-- Your footer content goes here -->
+    </footer>
+
+    <!-- JavaScript code to fetch and display recipes -->
+    <script>
+      function fetchRecipes() {
+        // Make an AJAX request to fetch recipes from the server
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Parse the JSON response
+              var recipes = JSON.parse(xhr.responseText);
+
+              // Create HTML for each recipe and append to the container
+              var recipeContainer = document.getElementById("recipe-container");
+              recipes.forEach(function (recipe) {
+                var recipeDiv = document.createElement("div");
+                recipeDiv.classList.add("product", "new");
+                var recipePictureDiv = document.createElement("div");
+                recipePictureDiv.classList.add("Recipe-Picture");
+                var img = document.createElement("img");
+                img.src = recipe.image;
+                img.alt = "Recipe: " + recipe.title;
+                recipePictureDiv.appendChild(img);
+                var recipeInfoDiv = document.createElement("div");
+                recipeInfoDiv.classList.add("recipe-info");
+                var categories = document.createElement("h5");
+                categories.classList.add("categories");
+                categories.textContent = recipe.category;
+                var title = document.createElement("h4");
+                title.classList.add("title");
+                title.textContent = recipe.title;
+                var button = document.createElement("button");
+                button.textContent = "Click Here";
+                button.dataset.recipeId = recipe.recipeid; // Set data-attribute to store recipe ID
+                button.addEventListener("click", function () {
+                  var recipeId = this.dataset.recipeId;
+                  window.location.href =
+                    "view_recipe_details.php?id=" + recipeId;
+                }); // Redirect to view_recipe_details.php with recipe ID as query parameter
+                recipeInfoDiv.appendChild(categories);
+                recipeInfoDiv.appendChild(title);
+                recipeInfoDiv.appendChild(button);
+                recipeDiv.appendChild(recipePictureDiv);
+                recipeDiv.appendChild(recipeInfoDiv);
+                recipeContainer.appendChild(recipeDiv);
+              });
+            } else {
+              console.error("Failed to fetch recipes. Status: " + xhr.status);
+            }
+          }
+        };
+        xhr.open(
+          "GET",
+          "http://localhost/Recipe_project/fetch_recipes.php",
+          true
+        );
+        xhr.send();
+      }
+
+      // Call the fetchRecipes function when the page loads
+      window.onload = function () {
+        fetchRecipes();
+      };
+    </script>
+  </body>
+</html>

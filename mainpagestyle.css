@@ -1,0 +1,96 @@
+/* mainpagestyle.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: hsl(16, 91%, 46%);
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Align items vertically */
+}
+
+.header-right :hover {
+  background-color: #10a836;
+}
+
+.header-right {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.header-right a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.header-right {
+  margin-left: auto; /* Pushes the header-right to the right */
+}
+
+.logo img {
+  width: 100px; /* Adjust width as needed */
+}
+
+.recipe-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.product {
+  width: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid #ccc; /* Adding border to each recipe */
+  border-radius: 5px; /* Adding border radius */
+}
+
+.product .recipe-info {
+  padding: 10px;
+}
+
+.product img {
+  width: 100%; /* Ensuring images fill their container */
+  height: auto;
+  border-top-left-radius: 5px; /* Rounded corners for images */
+  border-top-right-radius: 5px;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.recipe-info button {
+  background-color: #320bce;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recipe-info button:hover {
+  background-color: #10a836;
+}
+
+.categories {
+  color: #888;
+  font-size: 14px;
+}
+
+.title {
+  margin: 10px 0;
+}
